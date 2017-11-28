@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://shenwl.github.io/react-todo/build",
   "dependencies": {
+    "leancloud-storage": "^3.4.1",
     "normalize.css": "^7.0.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
