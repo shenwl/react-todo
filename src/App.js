@@ -40,17 +40,18 @@ class App extends Component {
       </div>
     )
   }
+  componentDidUpdate() {
+    localStorage.save('todoList', this.state.todoList)
+  }
   toggle(e, todo) {
     todo.status = todo.status === 'completed' ? '' : 'completed'
     this.setState(this.state)
-    localStorage.save('todoList', this.state.todoList)
   }
   changeTitle(event) {
     this.setState({
       newTodo: event.target.value,
       todoList: this.state.todoList
     })
-    localStorage.save('todoList', this.state.todoList)
   }
   addTodo(event) {
     this.state.todoList.push({
@@ -63,12 +64,10 @@ class App extends Component {
       newTodo: '',
       todoList: this.state.todoList
     })
-    localStorage.save('todoList', this.state.todoList)
   }
   delete(event, todo) {
     todo.deleted = true
     this.setState(this.state)
-    localStorage.save('todoList', this.state.todoList)
   }
 }
 
