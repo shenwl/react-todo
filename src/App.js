@@ -11,8 +11,8 @@ class App extends Component {
     super(props)
     this.state = {
       newTodo: '',
-    }
-    todoList: localStorage.load('todoList') || []
+      todoList: localStore.load('todoList') || []
+    } 
   }
   render() {
     let todos = this.state.todoList
@@ -41,7 +41,7 @@ class App extends Component {
     )
   }
   componentDidUpdate() {
-    localStorage.save('todoList', this.state.todoList)
+    localStore.save('todoList', this.state.todoList)
   }
   toggle(e, todo) {
     todo.status = todo.status === 'completed' ? '' : 'completed'
