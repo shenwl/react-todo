@@ -19,16 +19,9 @@ export default class UserDialog extends Component {
     }
     signUp(e) {}
     signIn(e) {}
-    changeUsername(e) {
-        //this.state.formData.username = e.target.value
-        //this.setState(this.state)这样会warning
+    changeFormData(key, e) {
         let stateCopy = JSON.parse(JSON.stringify(this.state))
-        stateCopy.formData.username = e.target.value
-        this.setState(stateCopy)
-    }
-    changePassword(e) {
-        let stateCopy = JSON.parse(JSON.stringify(this.state))
-        stateCopy.formData.password = e.target.value
+        stateCopy.formData[key] = e.target.value
         this.setState(stateCopy)
     }
     render() {
