@@ -53,15 +53,11 @@ class App extends Component {
   signOut() {
     signOut()
   }
-  onSignUp(user) {
+  onSignUpOrSignIn(user) {
     let stateCopy = JSON.parse(JSON.stringify(this.state))
     stateCopy.user = user
     this.setState(stateCopy)
-  }
-  onSignIn(user) {
-    let stateCopy = JSON.parse(JSON.stringify(this.state))
-    stateCopy.user = user
-    this.setState(stateCopy)
+
   }
   componentDidUpdate() {
     
