@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './UserDialog.css'
+import {signUp} from './leanCloud'
 
 export default class UserDialog extends Component {
     constructor(props) {
@@ -17,7 +18,17 @@ export default class UserDialog extends Component {
             select: e.target.value
         })
     }
-    signUp(e) {}
+    signUp(e) {
+        e.preventDefault()
+        let {username, password} = this.target.formData
+        let success = (user) => {
+            console.log(user)
+        }
+        let error = (error) => {
+            console.log(error)
+        }
+        signUp(username, password, success, error)
+    }
     signIn(e) {}
     changeFormData(key, e) {
         let stateCopy = JSON.parse(JSON.stringify(this.state))
@@ -30,12 +41,12 @@ export default class UserDialog extends Component {
                 <div className="row">
                     <label>用户名</label>
                     <input type="text" value={this.state.formData.username}
-                        onChange={this.changeUsername.bind(this)}/>
+                        onChange={this.changeFormData.bind(this)}/>
                 </div>
                 <div className="row">
                     <label>密码</label>
                     <input type="password" value={this.state.formData.password}
-                        onChange={this.changePassword.bind(this)}/>
+                        onChange={this.changeFormData.bind(this)}/>
                 </div>
                 <div className="row actions">
                     <button type="submit">注册</button>
@@ -47,12 +58,12 @@ export default class UserDialog extends Component {
                 <div className="row">
                     <label>用户名</label>
                     <input type="text" value={this.state.formData.username}
-                        onChange={this.changeUsername.bind(this)}/>
+                        onChange={this.changeFormData.bind(this)}/>
                 </div>
                 <div className="row">
                     <label>密码</label>
                     <input type="password" value={this.state.formData.password}
-                        onChange={this.changePassword.bind(this)}/>
+                        onChange={this.changeFormData.bind(this)}/>
                 </div>
                 <div className="row actions">
                     <button type="submit">登录</button>
