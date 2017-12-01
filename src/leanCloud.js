@@ -9,6 +9,29 @@ AV.init({
 
 export default AV
 
+//所有Todo相关的leanCloud操作s
+export const TodoModel = {
+    create({status, title, deleted}, successFn, errorFn) {
+        var Todo = AV.Object.extend('Todo')
+        var todo = new Todo()
+        todo.set('title', title)
+        todo.set('status', status)
+        todo.set('deleted', deleted)
+        todo.save().then(function (response) {
+            successFn.call(null, response.id)
+        }, function (error) {
+            errorFn && errorFn.call(null, error)
+        })
+
+    },
+    update() {
+
+    },
+    destroy() {
+
+    },
+}
+
 export function signUp (email, username, password, successFn, errorFn) {
     var user = new AV.User()
     user.setUsername(username)
