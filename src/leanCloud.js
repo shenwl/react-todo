@@ -18,6 +18,8 @@ export const TodoModel = {
                 return {id: t.id, ...t.attributes}
             })
             successFn.call(null, arr)
+        }, (error) => {
+            errorFn && errorFn.call(null, error)
         })
     },
     create({status, title, deleted}, successFn, errorFn) {
@@ -33,7 +35,7 @@ export const TodoModel = {
 
         todo.setACL(acl)
 
-        todo.save().then(function (response) {
+        todo.save().then(function(response) {
             successFn.call(null, response.id)
         }, function (error) {
             errorFn && errorFn.call(null, error)
