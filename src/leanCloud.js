@@ -13,6 +13,7 @@ export function signUp (username, password, successFn, errorFn) {
     var user = new AV.User()
     user.setUsername(username)
     user.setPassword(password)
+    console.log(user)
     user.signUp().then(function(loginedUser) {
         let user = getUserFromAVUser(loginedUser)
         successFn.call(null, user)
@@ -23,6 +24,7 @@ export function signUp (username, password, successFn, errorFn) {
     return undefined
 }
 function getUserFromAVUser(AVUser) {
+    console.log()
     return {
         id: AVUser.id,
         ...AVUser.attributes

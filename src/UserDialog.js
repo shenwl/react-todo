@@ -6,7 +6,7 @@ export default class UserDialog extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            select: 'signUp',
+            selected: 'signUp',
             formData: {
                 username: '',
                 password: '',
@@ -15,14 +15,14 @@ export default class UserDialog extends Component {
     }
     switch(e) {
         this.setState({
-            select: e.target.value
+            selected: e.target.value
         })
     }
     signUp(e) {
         e.preventDefault()
-        let {username, password} = this.target.formData
+        let {username, password} = this.state.formData
         let success = (user) => {
-            this.props.onSignUp.call(null, user)
+            this.props.onSignUpOrSignIn.call(null, user)
         }
         let error = (error) => {
             switch(error.code) {
@@ -34,13 +34,14 @@ export default class UserDialog extends Component {
                     break
             }
         }
+        console.log(username)
         signUp(username, password, success, error)
     }
     signIn(e) {
         e.preventDefault()
-        let {username, password} = this.target.formData
+        let {username, password} = this.state.formData
         let success = (user) => {
-            this.props.onSignIn.call(null, user)
+            this.props.onSignUpOrSignIn.call(null, user)
         }
         let error = (error) => {
             switch(error.code) {
@@ -65,12 +66,12 @@ export default class UserDialog extends Component {
                 <div className="row">
                     <label>用户名</label>
                     <input type="text" value={this.state.formData.username}
-                        onChange={this.changeFormData.bind(this)}/>
+                        onChange={this.changeFormData.bind(this, 'username')}/>
                 </div>
                 <div className="row">
                     <label>密码</label>
                     <input type="password" value={this.state.formData.password}
-                        onChange={this.changeFormData.bind(this)}/>
+                        onChange={this.changeFormData.bind(this, 'password')}/>
                 </div>
                 <div className="row actions">
                     <button type="submit">注册</button>
@@ -81,13 +82,11 @@ export default class UserDialog extends Component {
             <form className="signIn" onSubmit={this.signIn.bind(this)}>
                 <div className="row">
                     <label>用户名</label>
-                    <input type="text" value={this.state.formData.username}
-                        onChange={this.changeFormData.bind(this)}/>
+                    <input type="text"/>
                 </div>
                 <div className="row">
                     <label>密码</label>
-                    <input type="password" value={this.state.formData.password}
-                        onChange={this.changeFormData.bind(this)}/>
+                    <input type="password"/>
                 </div>
                 <div className="row actions">
                     <button type="submit">登录</button>
@@ -100,13 +99,13 @@ export default class UserDialog extends Component {
                 <div className="UserDialog">
                     <nav>
                         <label>
-                            <input type="radio" value="signUp" 
-                            checked={this.state.selected === 'signUp'} 
+                            <input type="radio" value="signIn" 
+                            checked={this.state.selected === 'signIn'} 
                             onChange={this.switch.bind(this)}/>登录
                         </label>
                         <label>
-                            <input type="radio" value="signIn" 
-                            checked={this.state.selected === 'signIn'}
+                            <input type="radio" value="signUp" 
+                            checked={this.state.selected === 'signUp'}
                             onChange={this.switch.bind(this)} />注册
                         </label>
                     </nav>

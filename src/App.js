@@ -45,8 +45,7 @@ class App extends Component {
         {this.state.user.id ? 
           null : 
           <UserDialog 
-            onSignUp={this.onSignUpOrSignIn.bind(this)}
-            onSignIn={this.onSignUpOrSignIn.bind(this)}/>}
+            onSignUpOrSignIn={this.onSignUpOrSignIn.bind(this)}/>}
       </div>
     )
   }
@@ -57,7 +56,6 @@ class App extends Component {
     let stateCopy = JSON.parse(JSON.stringify(this.state))
     stateCopy.user = user
     this.setState(stateCopy)
-
   }
   componentDidUpdate() {
     
