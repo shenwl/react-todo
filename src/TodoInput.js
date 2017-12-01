@@ -1,5 +1,5 @@
 import React from 'react'
-import './TodoInput.css'
+import './css/TodoInput.css'
 
 function submit(props, e) {
     if(e.key === 'Enter') {
