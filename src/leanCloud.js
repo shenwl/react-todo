@@ -23,22 +23,28 @@ export function signUp (username, password, successFn, errorFn) {
 
     return undefined
 }
-function getUserFromAVUser(AVUser) {
-    console.log()
-    return {
-        id: AVUser.id,
-        ...AVUser.attributes
-    }
-}
 
 export function signIn (username, password, successFn, errorFn) {
-    AV.User.login(username, password).then(function(loginedUser) {
+    AV.User.logIn(username, password).then(function(loginedUser) {
         let user = getUserFromAVUser(loginedUser)
         successFn.call(null, user)
     }, function(error) {
         errorFn.call(null, error)
     })
 
+}
+
+export function signOut() {
+    AV.User.logOut()
+    return undefined
+}
+
+function getUserFromAVUser(AVUser) {
+    console.log()
+    return {
+        id: AVUser.id,
+        ...AVUser.attributes
+    }
 }
 
 export function getCurrentUser() {
@@ -48,8 +54,4 @@ export function getCurrentUser() {
     }else {
         return null
     }
-}
-export function signOut() {
-    AV.User.logOut()
-    return undefined
 }

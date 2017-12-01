@@ -49,11 +49,17 @@ class App extends Component {
       </div>
     )
   }
+  deepCopy(obj) {
+    return JSON.parse(JSON.stringify(obj))
+  }
   signOut() {
     signOut()
+    let stateCopy = this.deepCopy(this.state)
+    stateCopy.user = {}
+    this.setState(stateCopy)
   }
   onSignUpOrSignIn(user) {
-    let stateCopy = JSON.parse(JSON.stringify(this.state))
+    let stateCopy = this.deepCopy(this.state)
     stateCopy.user = user
     this.setState(stateCopy)
   }
