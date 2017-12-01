@@ -40,8 +40,18 @@ export const TodoModel = {
         })
 
     },
-    update() {
-
+    update({id, title, status, deleted}, successFn, errorFn) {
+        var todo = AV.Object.createWithoutData('Todo', id);
+        // 修改属性
+        title !== undefined && todo.set('title', title)
+        status !== undefined && todo.set('status', status)
+        deleted !== undefined && todo.set('deleted', deleted)
+     
+        todo.save().then((response) => {
+            successFn.call(null, response.id)
+        }, (error) => {
+            errorFn && errorFn.call(null, error)
+        })
     },
     destroy(todoId, successFn, errorFn) {
         let todo = AV.Object.createWithoutData('Todo', todoId)
