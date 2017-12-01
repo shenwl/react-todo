@@ -14,6 +14,14 @@ class App extends Component {
       user: getCurrentUser() || {},
       newTodo: '',
       todoList: []
+    }
+    let user = getCurrentUser()
+    if(user) {
+      TodoModel.getByUser(user,(todos) => {
+        let stateCopy = this.deepCopy(this.state)
+        stateCopy.todoList = todos
+        this.setState(stateCopy)
+      })
     } 
   }
   render() {
