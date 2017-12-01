@@ -29,9 +29,9 @@ export const TodoModel = {
 
         let acl = new AV.ACL()
         acl.setPublicReadAccess(false)
-        acl.setWriteAccess(AV.User.current(),true)
+        acl.setWriteAccess(AV.User.current(), true)
 
-        todo.setACL
+        todo.setACL(acl)
 
         todo.save().then(function (response) {
             successFn.call(null, response.id)
