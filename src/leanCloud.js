@@ -21,8 +21,8 @@ export const TodoModel = {
         })
     },
     create({status, title, deleted}, successFn, errorFn) {
-        var Todo = AV.Object.extend('Todo')
-        var todo = new Todo()
+        let Todo = AV.Object.extend('Todo')
+        let todo = new Todo()
         todo.set('title', title)
         todo.set('status', status)
         todo.set('deleted', deleted)
