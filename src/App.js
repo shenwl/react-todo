@@ -28,13 +28,13 @@ class App extends Component {
     let todos = this.state.todoList
       .filter((item) => !item.deleted)
       .map((item, index) => {
-      return (
-        <li key={index}>
-          <TodoItem todo={item} onToggle={this.toggle.bind(this)}
-            onDelete={this.delete.bind(this)} />
-        </li>
-      )
-    })
+        return (
+          <li key={index}>
+            <TodoItem todo={item} onToggle={this.toggle.bind(this)}
+              onDelete={this.delete.bind(this)} />
+          </li>
+        )
+      })
 
     return (
       <div className="App">
