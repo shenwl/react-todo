@@ -93,7 +93,7 @@ class App extends Component {
     let newTodo = {
       title: event.target.value,
       status: null,
-      delete: false      
+      deleted: false      
     }
     TodoModel.create(newTodo, (id) => {
       newTodo.id = id
@@ -108,7 +108,7 @@ class App extends Component {
   }
   delete(event, todo) {
     TodoModel.destroy(todo.id, () => {
-      todo.delete = true
+      todo.deleted = true
       this.setState(this.state)
     })
   }
