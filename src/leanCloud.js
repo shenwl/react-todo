@@ -13,6 +13,7 @@ export default AV
 export const TodoModel = {
     getByUser(user, successFn, errorFn) {
         let query = new AV.Query('Todo')
+        query.equalTo('deleted', false)
         query.find().then((response) => {
             let arr = response.map((t) => {
                 return {id: t.id, ...t.attributes}
@@ -32,7 +33,8 @@ export const TodoModel = {
         let acl = new AV.ACL()
         acl.setPublicReadAccess(false)
         acl.setWriteAccess(AV.User.current(), true)
-
+        acl.setReadAccess(AV.User.current(), true)
+        
         todo.setACL(acl)
 
         todo.save().then(function(response) {
@@ -56,12 +58,7 @@ export const TodoModel = {
         })
     },
     destroy(todoId, successFn, errorFn) {
-        let todo = AV.Object.createWithoutData('Todo', todoId)
-        todo.destroy().then(function (response) {
-          successFn && successFn.call(null)
-        }, function (error) {
-          errorFn && errorFn(null, error)
-        })
+        TodoModel.update({id: todoId, deleted: true}, successFn, errorFn)
     },
 }
 

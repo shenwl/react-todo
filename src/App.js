@@ -16,6 +16,7 @@ class App extends Component {
       todoList: []
     }
     let user = getCurrentUser()
+    console.log(user)
     if(user) {
       TodoModel.getByUser(user, (todos) => {
         let stateCopy = this.deepCopy(this.state)
@@ -92,7 +93,7 @@ class App extends Component {
   addTodo(event) {
     let newTodo = {
       title: event.target.value,
-      status: null,
+      status: '',
       deleted: false      
     }
     TodoModel.create(newTodo, (id) => {
