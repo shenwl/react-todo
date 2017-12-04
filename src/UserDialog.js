@@ -33,6 +33,9 @@ export default class UserDialog extends Component {
                 case 218:
                     alert('无效的密码，不允许空白密码')
                     break
+                case 204:
+                    alert('没有提供电子邮箱地址')
+                    break
                 default:
                     alert(error)
                     break
